@@ -136,6 +136,7 @@
         const {random:r}=Math;
         ontouchstart=ontouchmove=evt=>{
             try{
+                evt.preventDefault();
                 let heart=document.createElement('span'),
                     t=evt.changedTouches[0],
                     s=8+(r()*14);
