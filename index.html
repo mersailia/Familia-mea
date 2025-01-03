@@ -1,0 +1,155 @@
+<html dir="ltr" lang="ro-RO">
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1,maximum-scale=10,user-scalable=yes" user-scale="yes" />
+        <meta name="author" content="Merșa Ilia" />
+        <title>* Familia mea dragă *</title>
+        <style type="text/css">
+            :root{
+                --size-0:20px;
+                --size-1:calc(var(--size-0) / 32);
+                --size-2:12vw;
+                --color-0:deepskyblue;
+                --color-1:skyblue;
+            }
+            .night{
+                --color-0:deeppink;
+                --color-1:pink;
+            }
+            *{
+                margin:0;
+                padding:0;
+                color:var(--color-1);
+                tet-shadow:var(--size-1) var(--size-1) 0 var(--color-1);
+                font:normal bolder var(--size-0) Times New Roman;
+                
+            }
+            html,body{
+                width:100%;
+                height:100%;
+                overflow:hidden;
+                background:url(fundal.jpg) no-repeat center / cover;
+            }
+            #heart{
+                display:none;
+                position:absolute;
+                pointer-events:none;
+                animation:fade 1s linear infinite;
+                filter:drop-shadow(0 0 15px gold);
+            }
+            #heart::before{
+                content:'';
+                width:100%;
+                height:100%;
+                position:absolute;
+                animation:dance 1s linear infinite;
+                background:url(inima.webp) no-repeat center / cover;
+            }
+            table{
+                width:100%;
+                height:100%;
+                opacity:.8;
+                & tr,& th{
+                    border:1px solid var(--color-1);
+                    & img,& video{
+                        width:100%;
+                        height:100%;
+                    }
+                    & audio{
+                        width:100%;
+                    }
+                }
+            }
+            @media only screen and (orientation:landscape){
+                html{
+                    cursor:pointer;
+                }
+                body{
+                    display:none;
+                }
+            }
+            @keyframes fade{
+                0,100%{
+                    opacity:0;
+                }
+                20%,80%{
+                    opacity:1;
+                }
+            }
+            @keyframes dance{
+                to{
+                    transform:translate(300px) rotate(360deg);
+                }
+            }
+        </style>
+        <script type="text/javascript">
+            class Err{
+                constructor(message=null,name=null){
+                    this.message=message;
+                    this.name=name;
+                };
+                show(){
+                    let err=`${new Date().toLocaleString()}\r\nSORRY, Error: ${this.message} to "${this.name}" function.`;
+                    if(console.log) console.log(err);
+                    else if(console.error) console.error(err);
+                    else if(console.warn) console.warn(err);
+                    else if(alert) alert(err);
+                    else return;
+                };
+            };
+        </script>
+    </head>
+    <body>
+        <div id="heart"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <img src="noi-0.jpg" />
+                    </th>
+                    <th>
+                        <img src="noi-1.jpg" />
+                    </th>
+                    <th>
+                        <img src="noi-2.jpg" />
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <img src="noi-3.jpg" />
+                    </th>
+                    <th colspan="2">
+                        <audio src="0.mp3" controls />
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <video src="bebe.mp4" controls />
+                    </th>
+                    <th colspan="2">
+                        <audio src="1.mp3" controls />
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </body>
+    <script type="text/javascript">
+        const {random:r}=Math;
+        ontouchstart=ontouchmove=evt=>{
+            try{
+                let heart=document.createElement('span'),
+                    t=evt.changedTouches[0],
+                    s=8+(r()*14);
+                heart.id='heart';
+                heart.style.display='block';
+                heart.style.left=t.pageX+'px';
+                heart.style.top=t.pageY+'px';
+                heart.style.width=heart.style.height=s+'vw';
+                heart.style.transform=`rotate(${r()*360}deg`;
+                document.body.appendChild(heart);
+                setTimeout(()=>heart.remove(),1000);
+            }catch(err){
+                new Err(err,'window.ontouchmove').show();
+            };
+        };
+    </script>
+</html>
